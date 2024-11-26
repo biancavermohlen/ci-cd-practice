@@ -1,7 +1,17 @@
 name: CI/CD Pipeline
-on: [push, pull_request]
+
+on:
+  push:
+    branches:
+      - main 
+  pull_request:
+    branches:
+      - main  
 
 jobs:
+  build-and-test:
+    runs-on: ubuntu-latest  
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -16,28 +26,7 @@ jobs:
         
       - name: Run tests
         run: npm test
-        
-      - name: build-and-test
-        run: ubuntu-latest
 
-        name: CI/CD Pipeline
-on: [push, pull_request]
-
-jobs:
-    steps:
-      - name : build-and-test
-      run: ubuntu-latest
-      
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          
-      - name: Install dependencies
-        run: npm install
         
       - name: Run tests
         run: npm test
